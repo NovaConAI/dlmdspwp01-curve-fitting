@@ -1,0 +1,42 @@
+[project]
+name = "dlmdspwp01-curve-fitting"
+version = "1.0.0"
+description = "IU Master AI — DLMDSPWP01 Programming with Python: Least-squares ideal-function selection with SQLAlchemy persistence and Bokeh visualization."
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Alen", email = "alen.9@hotmail.de" },
+]
+
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "scipy>=1.13",
+    "sqlalchemy>=2.0",
+    "bokeh>=3.4",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.5",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "N", "D"]
+ignore = ["D203", "D213"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --cov=src --cov-report=term-missing"
