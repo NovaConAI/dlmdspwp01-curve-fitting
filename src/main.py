@@ -11,8 +11,6 @@ Running this module executes the full assignment workflow:
 6. Render the four-panel Bokeh visualisation to HTML.
 """
 
-from __future__ import annotations
-
 from pathlib import Path
 
 import pandas as pd
@@ -70,8 +68,11 @@ def run() -> None:
     session_factory = make_session_factory(engine)
 
     with session_factory.begin() as session:
-        _persist_training(session, training_df)
-        _persist_ideal(session, ideal_df)
+        if not session.query(TrainingDataRow).first():
+            _persist_training(session, training_df)
+
+        if not session.query(IdealFunctionRow).first():
+            _persist_ideal(session, ideal_df)
 
     selector = IdealFunctionSelector(training_df, ideal_df)
     matches = selector.select()
@@ -80,7 +81,8 @@ def run() -> None:
     assignments = mapper.map_all(test_df)
 
     with session_factory.begin() as session:
-        _persist_assignments(session, assignments)
+        if not session.query(TestPointAssignment).first():
+            _persist_assignments(session, assignments)
 
     BokehPlotter(training_df, ideal_df, matches, assignments).render(OUTPUT_DIR / "plot.html")
 
@@ -88,7 +90,7 @@ def run() -> None:
     for m in matches:
         print(
             f"  {m.training_name} -> {m.ideal_name} "
-            f"(SSE={m.sum_squared_error:.4f}, max|Δ|={m.max_abs_deviation:.4f})"
+            f"(SSE={m.sum_squared_error:.4f}, max|d|={m.max_abs_deviation:.4f})"
         )
     assigned = sum(1 for a in assignments if a.ideal_name is not None)
     print(f"Test points: {assigned}/{len(assignments)} assigned.")

@@ -1,7 +1,5 @@
 """Tests for the custom exception hierarchy."""
 
-from __future__ import annotations
-
 import pytest
 
 from src.exceptions import (

@@ -13,8 +13,6 @@ Two responsibilities are encapsulated by separate classes:
   the factor sqrt(2).
 """
 
-from __future__ import annotations
-
 import math
 from dataclasses import dataclass
 

@@ -4,8 +4,6 @@ These tests run the full pipeline against the real dataset shipped with
 the assignment in an isolated working directory.
 """
 
-from __future__ import annotations
-
 import shutil
 import sqlite3
 from pathlib import Path

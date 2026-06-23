@@ -1,4 +1,4 @@
-"""DLMDSPWP01 — Curve-fitting package.
+"""DLMDSPWP01 -- Curve-fitting package.
 
 Implements selection of four best-fitting ideal functions from a candidate
 pool using the least-squares criterion, validation of test points against

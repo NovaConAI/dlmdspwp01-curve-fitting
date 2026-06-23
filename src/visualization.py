@@ -6,8 +6,6 @@ overlays all test-point assignments belonging to that ideal function.
 The result is written to an HTML file that can be opened in any browser.
 """
 
-from __future__ import annotations
-
 from pathlib import Path
 
 import pandas as pd
@@ -27,16 +25,18 @@ class BokehPlotter:
         ideal: pd.DataFrame,
         matches: list[IdealMatch],
         assignments: list[TestAssignment],
+        show_toolbar: bool = True,
     ) -> None:
         """Bind the input data needed to render all panels."""
         self.training: pd.DataFrame = training
         self.ideal: pd.DataFrame = ideal
         self.matches: list[IdealMatch] = matches
         self.assignments: list[TestAssignment] = assignments
+        self.show_toolbar: bool = show_toolbar
 
     def render(self, output_path: Path) -> Path:
         """Render the four-panel grid and save it to ``output_path``."""
-        output_file(filename=str(output_path), title="DLMDSPWP01 — Curve Fitting")
+        output_file(filename=str(output_path), title="DLMDSPWP01 -- Curve Fitting")
         panels = [self._panel_for(match) for match in self.matches]
         grid = gridplot(panels, ncols=2, sizing_mode="stretch_width")
         save(grid)
@@ -49,7 +49,8 @@ class BokehPlotter:
             x_axis_label="x",
             y_axis_label="y",
             height=350,
-            tools="pan,wheel_zoom,box_zoom,reset,save",
+            tools="pan,wheel_zoom,box_zoom,reset,save" if self.show_toolbar else "",
+            toolbar_location="right" if self.show_toolbar else None,
         )
         fig.line(x, self.ideal[match.ideal_name], legend_label="ideal", line_width=2)
         fig.scatter(
@@ -79,7 +80,7 @@ class BokehPlotter:
                 legend_label="test (assigned)",
             )
             fig.add_tools(
-                HoverTool(tooltips=[("x", "@x"), ("y", "@y"), ("Δy", "@delta")], renderers=[r])
+                HoverTool(tooltips=[("x", "@x"), ("y", "@y"), ("dy", "@delta")], renderers=[r])
             )
 
         fig.legend.location = "top_left"

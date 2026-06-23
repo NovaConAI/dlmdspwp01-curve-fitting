@@ -1,8 +1,8 @@
 # DLMDSPWP01 — Programming with Python: Curve-Fitting Assignment
 
-**Author:** Alen — IU International University of Applied Sciences, M.Sc. Artificial Intelligence
+**Author:** Alen Nukovic — IU International University of Applied Sciences, M.Sc. Artificial Intelligence
 **Module:** DLMDSPWP01 — Programming with Python
-**Submission target:** May 2026
+**Submission target:** June 2026
 
 This repository contains the implementation accompanying the written assignment for the module *Programming with Python* (DLMDSPWP01). It selects the four best-fitting ideal functions from a pool of fifty for four training datasets using the least-squares criterion, validates test points against the chosen functions using a √2 deviation factor, persists all data in a SQLite database via SQLAlchemy, and visualises the results with Bokeh.
 

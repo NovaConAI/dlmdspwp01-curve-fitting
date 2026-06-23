@@ -7,8 +7,6 @@ hierarchy is also the formal demonstration of object-oriented design with
 inheritance required by the module brief.
 """
 
-from __future__ import annotations
-
 from abc import ABC, abstractmethod
 from pathlib import Path
 

@@ -6,9 +6,6 @@ allows callers to catch every package-specific error with a single
 ``except`` clause while still being able to react to individual failures.
 """
 
-from __future__ import annotations
-
-
 class CurveFittingError(Exception):
     """Base class for all errors raised by the curve-fitting package."""
 

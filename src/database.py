@@ -6,8 +6,6 @@ as the storage engine because the dataset is small and the file-based
 nature of SQLite keeps the deliverable fully self-contained.
 """
 
-from __future__ import annotations
-
 from pathlib import Path
 
 from sqlalchemy import Column, Float, Integer, String, create_engine

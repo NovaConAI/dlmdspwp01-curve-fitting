@@ -1,7 +1,5 @@
 """Tests for the curve-fitting analysis classes."""
 
-from __future__ import annotations
-
 import math
 
 import numpy as np
