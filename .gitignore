@@ -31,10 +31,8 @@ output/
 # IDE / editor configurations
 .vscode/
 .idea/
-.cursor/
 .fleet/
 .zed/
-.windsurf/
 
 # OS-specific artefacts
 .DS_Store
